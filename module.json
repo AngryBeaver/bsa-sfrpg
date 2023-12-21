@@ -1,6 +1,6 @@
 {
-    "title": "Beaver's System Adaption sfrpg",
-    "description": "sfrpg implementation for Beaver's System Interface",
+    "title": "Beaver's System Adaption sfrpg ( Starfinder )",
+    "description": "Starfinder implementation for Beaver's System Interface",
     "id": "bsa-sfrpg",
     "version": "1.0.0",
     "authors": [
