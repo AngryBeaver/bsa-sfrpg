@@ -10,7 +10,7 @@ export class Sfrpg implements SystemApi {
         return "sfrpg";
     }
     async actorRollSkill(actor, skillId){
-        let skill = actor.system.skills.skillId;
+        let skill = actor.system.skills[skillId];
         if(!skill){
             Object.entries(actor.system.skills).forEach(([id,s])=> {
                 // @ts-ignore

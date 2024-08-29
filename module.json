@@ -2,7 +2,7 @@
     "title": "Beaver's System Adaption sfrpg ( Starfinder )",
     "description": "Starfinder implementation for Beaver's System Interface",
     "id": "bsa-sfrpg",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "authors": [
       {
         "name": "angryBeaver",
@@ -31,6 +31,6 @@
     },
     "compatibility": {
       "minimum": "10",
-      "verified": "11"
+      "verified": "12"
     }
   }
