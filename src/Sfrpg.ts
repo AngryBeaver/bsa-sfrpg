@@ -23,19 +23,31 @@ export class Sfrpg implements SystemApi {
         if(!skill){
             ui.notifications?.error("skill not found on actor");
         }
-        const message = await actor.rollSkillCheck(skillId,skill);
-        if(!message){
-            return null
-        }
-        return message.callbackResult;
+        await actor.rollSkillCheck(skillId,skill);
+        return this.waitForChatMessage()
     }
 
+    async waitForChatMessage(maxTime = 5000):Promise<Roll|null> {
+        return new Promise((resolve, reject) => {
+            let hookId;
+            hookId = Hooks.once("createChatMessage", (chatMessage, options, userId) => {
+                clearTimeout(timeout);
+                if(!chatMessage.rolls){
+                    resolve(null);
+                }
+                resolve(chatMessage.rolls[0]);
+            });
+            const timeout = setTimeout(() => {
+                Hooks.off("createChatMessage", hookId); // Destroy the hook to prevent it from lingering
+                resolve(null); // Return `null` or handle however you want after a timeout
+            }, maxTime);
+        });
+    }
+
+
     async actorRollAbility(actor, abilityId){
-        const message =  await actor.rollAbility(abilityId);
-        if(!message){
-            return null
-        }
-        return message.callbackResult;
+        await actor.rollAbility(abilityId);
+        return this.waitForChatMessage();
     }
 
     actorCurrenciesGet(actor):Currencies {
